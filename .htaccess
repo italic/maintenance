@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+    #adresses ip à autoriser
+	#RewriteCond %{REMOTE_ADDR} !^xxx\.xxx\.xxx\.xxx
+	RewriteCond %{REQUEST_URI} !/maintenance [NC]
+	RewriteCond %{REQUEST_URI} !\.(css|gif|ico|jpg|jpeg|js|png) [NC]
+	RewriteRule .* /maintenance.html [R=503,L]
+</IfModule>
+
+# serve custom 503 response
+ErrorDocument 503 /maintenance.html
+
+<IfModule mod_headers.c>
+	Header always set Retry-After "86400"
+</IfModule>
