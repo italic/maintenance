@@ -1,5 +1,7 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
+	# laisser passer certbot
+	RewriteRule ^\.well-known\/acme-challenge\/ - [L]
     #adresses ip à autoriser
 	#RewriteCond %{REMOTE_ADDR} !^xxx\.xxx\.xxx\.xxx
 	RewriteCond %{REQUEST_URI} !/maintenance [NC]
